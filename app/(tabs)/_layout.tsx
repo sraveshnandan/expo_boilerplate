@@ -1,36 +1,48 @@
 import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
-import Colors from "@/constants/Colors";
-
-// Function to render TabBar icon
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { Colors, tintColor } from "@/constants";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.dark.tint,
-        headerShown: false,
+        tabBarLabelStyle: {
+          fontFamily: "SpaceMono",
+          fontWeight: "600",
+        },
+        tabBarActiveTintColor: tintColor,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ focused, color }) => (
+            <MaterialCommunityIcons
+              name={focused ? "home" : "home-outline"}
+              size={28}
+              color={color}
+            />
+          ),
+          tabBarLabel: "Home",
         }}
       />
+
       <Tabs.Screen
-        name="two"
+        name="Profile"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name={focused ? "person-circle-sharp" : "person-circle-outline"}
+              size={28}
+              color={color}
+            />
+          ),
+          tabBarLabel: "Profile",
         }}
       />
     </Tabs>
